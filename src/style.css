@@ -1,0 +1,139 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.container {
+  /* display: block; */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin: 50px auto;
+  border-radius: 5px;
+  padding: 30px 0;
+  text-align: center;
+  font-family: "Work Sans", sans-serif;
+  color: #2a0163;
+  max-width: 700px;
+  max-height: fit-content;
+  /* width: 700px; */
+  background: linear-gradient(
+    44.8deg,
+    rgba(255, 136, 102, 0.67) -53.1%,
+    rgba(255, 221, 136, 0.28) 49%
+  );
+}
+
+/* Enter a city */
+.form {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 15px;
+}
+
+/* City, day, t */
+.search-city {
+  margin-bottom: 20px;
+}
+
+#current-date {
+  font-size: 18px;
+  font-weight: 400;
+}
+
+time {
+  font-size: medium;
+  font-weight: 300;
+}
+
+/* Current weather */
+.current-weather {
+  margin-bottom: 40px;
+  height: 100px;
+
+  display: flex;
+  justify-content: space-around;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-items: center;
+}
+
+.current-weather h2 {
+  font-size: 60px;
+  font-weight: 400;
+  margin-bottom: 0;
+}
+
+.hummidy {
+  line-height: 2em;
+}
+
+#celsium {
+  font-size: 30px;
+}
+
+#fahrenheit,
+#celsium {
+  cursor: pointer;
+}
+
+#fahrenheit {
+  font-weight: 100;
+  font-size: 25px;
+}
+
+.current-weather .main {
+  font-size: 70px;
+  color: #f8a805;
+  padding: 0;
+}
+
+.temperature {
+  line-height: 1.5em;
+}
+
+/* weather for 5 days */
+.five-days {
+  display: flex;
+  justify-content: center;
+  height: 100px;
+  margin-bottom: 10px;
+
+  /* flex-wrap: wrap; */
+}
+
+.icons {
+  background-color: rgba(255, 255, 255, 0.7);
+  box-shadow: 5px 5px 5px 0.5;
+  border-radius: 5px;
+  padding: 0;
+  margin: 0 10px;
+  max-width: 110px;
+  padding: 10px 0;
+}
+
+.five-days h3 {
+  font-size: 18px;
+  margin-bottom: 5px;
+}
+
+.five-days i {
+  font-size: 28px;
+}
+
+.five-days .icofont-sun-alt {
+  color: #f8a805;
+}
+
+.five-days p {
+  margin-top: 5px;
+  margin-bottom: 0;
+}
+
+.five-days span {
+  color: #727272;
+  font-size: smaller;
+  padding-left: 0.5em;
+}
