@@ -137,3 +137,12 @@ time {
   font-size: smaller;
   padding-left: 0.5em;
 }
+
+.link-GitHub {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.link-GitHub a {
+  text-decoration: none;
+}
