@@ -102,7 +102,25 @@ function displayWeatherForCurrentPosition(response) {
   );
 }
 
-// Function for general code (city, temp, humidity, wind speed, weather description)
+// function for get url of current position
+function getCurrentPosition(position) {
+  let longitude = position.coords.longitude;
+  let latitude = position.coords.latitude;
+  let currentTempUrl = `https://api.openweathermap.org/data/2.5/find?lat=${latitude}&lon=${longitude}&units=metric&appid=${apiKey}`;
+  console.log(currentTempUrl);
+
+  axios.get(currentTempUrl).then(displayWeatherForCurrentPosition);
+}
+
+function onclickWeather() {
+  navigator.geolocation.getCurrentPosition(getCurrentPosition);
+}
+
+document
+  .querySelector(`#current-btn`)
+  .addEventListener("click", onclickWeather);
+
+// Function for generalise code (city, temp, humidity, wind speed, weather description)
 function displayWeatherData(
   city,
   temperature,
@@ -126,27 +144,6 @@ function displayWeatherData(
   let weatherDescription = document.querySelector(".description");
   weatherDescription.innerHTML = description;
 }
-
-// function for get url of current position
-function getCurrentPosition(position) {
-  // get long and lat of currrent location
-  let longitude = position.coords.longitude;
-  let latitude = position.coords.latitude;
-  let currentTempUrl = `https://api.openweathermap.org/data/2.5/find?lat=${latitude}&lon=${longitude}&units=metric&appid=${apiKey}`;
-  console.log(currentTempUrl);
-
-  axios.get(currentTempUrl).then(displayWeatherForCurrentPosition);
-}
-
-function onclickWeather() {
-  // let noneInput = document.querySelector("#search-city");
-  // noneInput.innerHTML = "";
-  navigator.geolocation.getCurrentPosition(getCurrentPosition);
-}
-
-document
-  .querySelector(`#current-btn`)
-  .addEventListener("click", onclickWeather);
 
 // Feature #3 ---Fahrenheit
 function changeToFahrenheit(celsius) {
