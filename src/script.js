@@ -1,11 +1,13 @@
-// Feature #1 Change current time
+// for live date and time
 let realTime = new Date();
 let temperatureCelsium = 0;
 
+// function for capitalization of first letter
 function padTo2Digits(num) {
   return num.toString().padStart(2, "0");
 }
 
+// function to get real date and time
 function formatDate(date) {
   let days = [
     "Sunday",
@@ -37,7 +39,6 @@ function formatDate(date) {
   let currentMonth = months[realTime.getMonth()];
   let currentHour = padTo2Digits(realTime.getHours());
   let currentMinutes = padTo2Digits(realTime.getMinutes());
-  // let currentDateAndMonth = `${currentDay}, ${currentDate} ${currentMonth}`;
   let hour = document.querySelector("#current-hour");
   hour.innerHTML = `${currentHour}`;
   let minutes = document.querySelector("#current-minutes");
@@ -48,11 +49,9 @@ function formatDate(date) {
   return realDate;
 }
 
-console.log(formatDate(new Date()));
+console.log(formatDate());
 
-// Weather for searching city using API 🔍
-let apiKey = "8fe82db9f96fcaef6fefb61a912cecd3";
-
+// Weather for searching any city using API 🔍
 function showCurrentWeather(response) {
   let cityName = response.data.name;
   temperatureCelsium = response.data.main.temp;
@@ -61,7 +60,7 @@ function showCurrentWeather(response) {
   let weatherDescription =
     response.data.weather[0].description.charAt(0).toUpperCase() +
     response.data.weather[0].description.slice(1);
-
+  // icon
   let iconElement = document.querySelector("#icon");
   iconElement.setAttribute(
     `src`,
@@ -79,6 +78,7 @@ function showCurrentWeather(response) {
   );
 }
 
+// function to get API URL and data
 function getCurrentWeather(event) {
   event.preventDefault();
   let searchInput = document.querySelector("#search-city");
@@ -87,10 +87,7 @@ function getCurrentWeather(event) {
   axios.get(apiUrl).then(showCurrentWeather);
 }
 
-document.querySelector("form").addEventListener("submit", getCurrentWeather);
-
 // Show weather for current location using API 📍
-
 function displayWeatherForCurrentPosition(response) {
   console.log(response);
   console.log(response.data.list[0].main.temp);
@@ -102,6 +99,7 @@ function displayWeatherForCurrentPosition(response) {
     response.data.list[2].weather[0].description.charAt(0).toUpperCase() +
     response.data.list[2].weather[0].description.slice(1);
 
+  // icon
   let iconElement = document.querySelector("#icon");
   iconElement.setAttribute(
     `src`,
@@ -129,15 +127,12 @@ function getCurrentPosition(position) {
   axios.get(currentTempUrl).then(displayWeatherForCurrentPosition);
 }
 
+// function to get current coordinates
 function onclickWeather() {
   navigator.geolocation.getCurrentPosition(getCurrentPosition);
 }
 
-document
-  .querySelector(`#current-btn`)
-  .addEventListener("click", onclickWeather);
-
-// Function for generalise code (city, temp, humidity, wind speed, weather description)
+// Function to generalise code (city, temp, humidity, wind speed, weather description)
 function displayWeatherData(
   city,
   temperature,
@@ -161,6 +156,17 @@ function displayWeatherData(
   let weatherDescription = document.querySelector(".description");
   weatherDescription.innerHTML = description;
 }
+
+// for APi
+let apiKey = "8fe82db9f96fcaef6fefb61a912cecd3";
+
+// search form
+document.querySelector("form").addEventListener("submit", getCurrentWeather);
+
+// "click" on Current button
+document
+  .querySelector(`#current-btn`)
+  .addEventListener("click", onclickWeather);
 
 // Feature #3 ---Fahrenheit
 function changeToFahrenheit(celsius) {
