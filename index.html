@@ -27,7 +27,7 @@
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
-    <link rel="manifest" href="/site.webmanifest" />
+    <!-- <link rel="manifest" href="#" />  -->
     <link rel="icon" href="favicon.ico?v=2" />
   </head>
 
@@ -57,14 +57,12 @@
 
       <!-- #2 City, day, time -->
       <div class="search-city">
-        <h1 class="current-city">Toronto</h1>
-        <h2 id="current-date">Sunday, 8 May</h2>
+        <h1 class="current-city"></h1>
+        <h2 id="current-date"></h2>
         <p>
           <time
-            ><span id="current-hour">9</span>:<span id="current-minutes"
-              >15</span
-            ></time
-          >
+            ><span id="current-hour"></span>:<span id="current-minutes"></span
+          ></time>
         </p>
       </div>
 
@@ -72,22 +70,23 @@
       <div class="row current-weather">
         <div class="col-5 temperature">
           <h2>
-            <span id="degrees" class="degrees">18</span
+            <span id="degrees" class="degrees"></span
             ><span id="celsium"> °C</span><span style="font-size: 30px">|</span
             ><span id="fahrenheit">°F</span>
           </h2>
-          <p class="description">Sunny</p>
+          <p class="description"></p>
         </div>
 
-        <div class="col-2"><i class="icofont-sun-alt main"></i></div>
+        <div class="col-2"><img class="" id="icon" src="" /></div>
+        <!-- <div class="col-2"><i class="icofont-sun-alt main"></i></div> -->
 
         <div class="col-5 hummidy">
           <p class="humid">
             <i class="icofont-water-drop"></i>
-            <span class="humidity-level">41</span> %
+            <span class="humidity-level"></span> %
           </p>
           <p class="wind">
-            <i class="icofont-wind"></i> <span class="wind-speed">5</span> km/h
+            <i class="icofont-wind"></i> <span class="wind-speed"></span> km/h
           </p>
         </div>
       </div>

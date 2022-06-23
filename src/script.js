@@ -62,6 +62,12 @@ function showCurrentWeather(response) {
     response.data.weather[0].description.charAt(0).toUpperCase() +
     response.data.weather[0].description.slice(1);
 
+  let iconElement = document.querySelector("#icon");
+  iconElement.setAttribute(
+    `src`,
+    `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
+  );
+
   displayWeatherData(
     cityName,
     temperatureCelsium,
@@ -93,6 +99,13 @@ function displayWeatherForCurrentPosition(response) {
   let weatherDescription =
     response.data.list[2].weather[0].description.charAt(0).toUpperCase() +
     response.data.list[2].weather[0].description.slice(1);
+
+  let iconElement = document.querySelector("#icon");
+  iconElement.setAttribute(
+    `src`,
+    `http://openweathermap.org/img/wn/${response.data.list[2].weather[0].icon}@2x.png`
+  );
+
   displayWeatherData(
     cityName,
     temperatureCelsium,
