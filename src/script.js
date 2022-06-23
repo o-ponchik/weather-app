@@ -68,6 +68,8 @@ function showCurrentWeather(response) {
     `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
   );
 
+  iconElement.setAttribute(`alt`, response.data.weather[0].description);
+
   displayWeatherData(
     cityName,
     temperatureCelsium,
@@ -105,6 +107,8 @@ function displayWeatherForCurrentPosition(response) {
     `src`,
     `http://openweathermap.org/img/wn/${response.data.list[2].weather[0].icon}@2x.png`
   );
+
+  iconElement.setAttribute(`alt`, response.data.list[2].weather[0].description);
 
   displayWeatherData(
     cityName,
