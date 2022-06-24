@@ -88,6 +88,7 @@ time {
   font-weight: 500;
   text-decoration: none;
   color: #2a0163;
+  cursor: default;
 }
 
 .current-weather .main {
