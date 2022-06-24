@@ -1,6 +1,5 @@
 // for live date and time
 let realTime = new Date();
-let temperatureCelsium = 0;
 
 // function for capitalization of first letter
 function padTo2Digits(num) {
@@ -54,7 +53,7 @@ console.log(formatDate());
 // Weather for searching any city using API 🔍
 function showCurrentWeather(response) {
   let cityName = response.data.name;
-  temperatureCelsium = response.data.main.temp;
+  temperatureCelsius = response.data.main.temp;
   let humidity = response.data.main.humidity;
   let windSpeed = response.data.wind.speed;
   let weatherDescription =
@@ -71,7 +70,7 @@ function showCurrentWeather(response) {
 
   displayWeatherData(
     cityName,
-    temperatureCelsium,
+    temperatureCelsius,
     humidity,
     windSpeed,
     weatherDescription
@@ -92,7 +91,7 @@ function displayWeatherForCurrentPosition(response) {
   console.log(response);
   console.log(response.data.list[0].main.temp);
   let cityName = response.data.list[2].name;
-  temperatureCelsium = response.data.list[2].main.temp;
+  temperatureCelsius = response.data.list[2].main.temp;
   let humidity = response.data.list[2].main.humidity;
   let windSpeed = response.data.list[2].wind.speed;
   let weatherDescription =
@@ -110,7 +109,7 @@ function displayWeatherForCurrentPosition(response) {
 
   displayWeatherData(
     cityName,
-    temperatureCelsium,
+    temperatureCelsius,
     humidity,
     windSpeed,
     weatherDescription
@@ -168,34 +167,38 @@ document
   .querySelector(`#current-btn`)
   .addEventListener("click", onclickWeather);
 
-// Feature #3 ---Fahrenheit
-function changeToFahrenheit(celsius) {
-  let selectF = document.querySelector("#fahrenheit");
-  selectF.innerHTML = `<span style="font-weight:400; font-size: 30px;">°F</span>`;
-  let changeC = document.querySelector("#celsium");
-  changeC.innerHTML = `<span style="font-weight:100; font-size: 25px;"> °C</span>`;
+// Convert celsius to Fahrenheit
+function changeToFahrenheit() {
+  // remove the active class from #celsius
+  let changeCelsius = document.querySelector("#celsius");
+  changeCelsius.classList.remove("active");
+  let changeFahrenhit = document.querySelector("#fahrenheit");
+  changeFahrenhit.classList.add("active");
+
   let degreesF = document.querySelector("#degrees");
-  degreesF.innerHTML = Math.round((celsius * 9) / 5 + 32);
+  degreesF.innerHTML = Math.round((temperatureCelsius * 9) / 5 + 32);
 
   return degreesF;
 }
 
+let temperatureCelsius = null;
+
 document.querySelector(`#fahrenheit`).onclick = function () {
-  changeToFahrenheit(temperatureCelsium);
+  changeToFahrenheit(temperatureCelsius);
 };
 
 //----Back to Celsius
 function changeToCelsius() {
-  let changeC = document.querySelector("#celsium");
-  changeC.innerHTML = `<span style="font-weight:400; font-size: 30px;"> °C</span>`;
-  let selectF = document.querySelector("#fahrenheit");
-  selectF.innerHTML = `<span style="font-weight:100; font-size: 25px;">°F</span>`;
+  let changeCelsius = document.querySelector("#celsius");
+  changeCelsius.classList.add("active");
+  let changeFahrenhit = document.querySelector("#fahrenheit");
+  changeFahrenhit.classList.remove("active");
   let degreesC = document.querySelector("#degrees");
-  degreesC.innerHTML = Math.round(temperatureCelsium);
+  degreesC.innerHTML = Math.round(temperatureCelsius);
 
   return degreesC;
 }
 
-document.querySelector(`#celsium`).onclick = function () {
+document.querySelector(`#celsius`).onclick = function () {
   changeToCelsius();
 };
