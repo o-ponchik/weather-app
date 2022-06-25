@@ -156,6 +156,29 @@ function displayWeatherData(
   weatherDescription.innerHTML = description;
 }
 
+// Forecast
+function displayForecast() {
+  let forecastElement = document.querySelector("#weather-forecast");
+  let days = ["Mon", "Tue", "Wed", "Thu", "Fri"];
+
+  let forecastHTML = `<div class="row g-2 five-days-forecast">`;
+  days.forEach(function (day) {
+    forecastHTML =
+      forecastHTML +
+      `<div class="col each-day shadow-sm p-3 mb-5 rounded">
+      <h3>${day}</h3>
+      <i class="icofont-sun-alt"></i>
+      <p>19°C<span> 8°C</span></p>
+      </div>`;
+  });
+
+  forecastHTML = forecastHTML + `</div>`;
+
+  forecastElement.innerHTML = forecastHTML;
+}
+
+displayForecast();
+
 // for APi
 let apiKey = "8fe82db9f96fcaef6fefb61a912cecd3";
 
@@ -202,3 +225,5 @@ function changeToCelsius() {
 document.querySelector(`#celsius`).onclick = function () {
   changeToCelsius();
 };
+
+// Forecast

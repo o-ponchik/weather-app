@@ -102,16 +102,14 @@ time {
 }
 
 /* weather for 5 days */
-.five-days {
+.five-days-forecast {
   display: flex;
   justify-content: center;
   height: 100px;
   margin-bottom: 10px;
-
-  /* flex-wrap: wrap; */
 }
 
-.icons {
+.each-day {
   background-color: rgba(255, 255, 255, 0.7);
   box-shadow: 5px 5px 5px 0.5;
   border-radius: 5px;
@@ -121,29 +119,31 @@ time {
   padding: 10px 0;
 }
 
-.five-days h3 {
+.five-days-forecast h3 {
   font-size: 18px;
   margin-bottom: 5px;
 }
 
-.five-days i {
+.five-days-forecast i {
   font-size: 28px;
 }
 
-.five-days .icofont-sun-alt {
+.five-days-forecast .icofont-sun-alt {
   color: #f8a805;
 }
 
-.five-days p {
+.five-days-forecast p {
   margin-top: 5px;
   margin-bottom: 0;
 }
 
-.five-days span {
+.five-days-forecast span {
   color: #727272;
   font-size: smaller;
   padding-left: 0.5em;
 }
+
+/* Link to GitHub and Netlify */
 
 .link-GitHub {
   text-align: center;
