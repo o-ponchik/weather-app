@@ -135,6 +135,7 @@ time {
 .five-days-forecast p {
   margin-top: 5px;
   margin-bottom: 0;
+  font-size: 15px;
 }
 
 .five-days-forecast span {
