@@ -68,15 +68,17 @@ function showCurrentWeather(response) {
   let weatherDescription =
     response.data.weather[0].description.charAt(0).toUpperCase() +
     response.data.weather[0].description.slice(1);
+
   // icon
   let iconElement = document.querySelector("#icon");
-  iconElement.setAttribute(
-    `src`,
-    `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
-  );
+  let resourceId = response.data.weather[0].id;
+  let icon = response.data.weather[0].icon;
+
+  iconElement.src = getWeatherIconResource(resourceId, icon);
 
   iconElement.setAttribute(`alt`, response.data.weather[0].description);
 
+  // forecast
   getForecast(response.data.coord);
 
   displayWeatherData(
@@ -87,6 +89,19 @@ function showCurrentWeather(response) {
     weatherDescription
   );
 }
+
+// function dayOrNight(iconId) {
+//   let icon = "";
+//   if (iconId === `02d`) {
+//     icon = `https://bmcdn.nl/assets/weather-icons/v3.0/fill/svg/overcast-day.svg`;
+//   } else if (iconId === `02n`) {
+//     icon = `https://bmcdn.nl/assets/weather-icons/v3.0/fill/svg/extreme-night.svg`;
+//   } else if (iconId === `01n`) {
+//     icon = `https://bmcdn.nl/assets/weather-icons/v3.0/fill/svg/clear-night.svg`;
+//   } else {
+//     icon = `https://bmcdn.nl/assets/weather-icons/v3.0/fill/svg/clear-day.svg`;
+//   }
+// }
 
 // function to get API URL and data
 function getCurrentWeather(event) {
@@ -109,10 +124,10 @@ function displayWeatherForCurrentPosition(response) {
 
   // icon
   let iconElement = document.querySelector("#icon");
-  iconElement.setAttribute(
-    `src`,
-    `http://openweathermap.org/img/wn/${response.data.list[2].weather[0].icon}@2x.png`
-  );
+  let resourceId = response.data.list[2].weather[0].id;
+  let icon = response.data.list[2].weather[0].icon;
+
+  iconElement.src = getWeatherIconResource(resourceId, icon);
 
   iconElement.setAttribute(`alt`, response.data.list[2].weather[0].description);
 
@@ -131,6 +146,7 @@ function getCurrentPosition(position) {
   let latitude = position.coords.latitude;
   let currentTempUrl = `https://api.openweathermap.org/data/2.5/find?lat=${latitude}&lon=${longitude}&units=metric&appid=${apiKey}`;
 
+  // forecast
   getForecastForCurrentPosition(position.coords);
 
   axios.get(currentTempUrl).then(displayWeatherForCurrentPosition);
@@ -166,6 +182,51 @@ function displayWeatherData(
   weatherDescription.innerHTML = description;
 }
 
+//
+function getWeatherIconResource(resourceId, icon) {
+  let weatherIconResource = "";
+  if (resourceId >= 200 && resourceId <= 232) {
+    weatherIconResource = `https://bmcdn.nl/assets/weather-icons/v3.0/fill/svg/thunderstorms-extreme-rain.svg`;
+  } else if (
+    resourceId >= 300 &&
+    resourceId <= 321 &&
+    resourceId >= 520 &&
+    resourceId <= 521
+  ) {
+    weatherIconResource = `https://bmcdn.nl/assets/weather-icons/v3.0/fill/svg/extreme-rain.svg`;
+  } else if (resourceId >= 500 && resourceId <= 504) {
+    if (icon === `10d`) {
+      weatherIconResource = `https://bmcdn.nl/assets/weather-icons/v3.0/fill/svg/extreme-day-rain.svg`;
+    } else {
+      weatherIconResource = `https://bmcdn.nl/assets/weather-icons/v3.0/fill/svg/extreme-night-rain.svg`;
+    }
+  } else if (resourceId === 511 && resourceId >= 600 && resourceId <= 622) {
+    weatherIconResource = `https://bmcdn.nl/assets/weather-icons/v3.0/fill/svg/extreme-sleet.svg`;
+  } else if (resourceId >= 701 && resourceId <= 781) {
+    weatherIconResource = `https://bmcdn.nl/assets/weather-icons/v3.0/fill/svg/extreme-fog.svg`;
+  } else if (resourceId === 800) {
+    if (icon === `01d`) {
+      weatherIconResource = `https://bmcdn.nl/assets/weather-icons/v3.0/fill/svg/clear-day.svg`;
+    } else {
+      weatherIconResource = `https://bmcdn.nl/assets/weather-icons/v3.0/fill/svg/clear-night.svg`;
+    }
+  } else if (resourceId === 801) {
+    if (icon === `02d`) {
+      weatherIconResource = `https://bmcdn.nl/assets/weather-icons/v3.0/fill/svg/overcast-day.svg`;
+    } else {
+      weatherIconResource = `https://bmcdn.nl/assets/weather-icons/v3.0/fill/svg/extreme-night.svg`;
+    }
+  } else if (resourceId === 802) {
+    weatherIconResource = `https://bmcdn.nl/assets/weather-icons/v3.0/fill/svg/cloudy.svg`;
+  } else if (resourceId >= 803 && resourceId <= 804) {
+    weatherIconResource = `https://bmcdn.nl/assets/weather-icons/v3.0/fill/svg/overcast.svg`;
+  } else {
+    weatherIconResource = `https://bmcdn.nl/assets/weather-icons/v3.0/fill/svg/clear-day.svg`;
+  }
+
+  return weatherIconResource;
+}
+
 // Forecast
 function displayForecast(response) {
   let forecast = response.data.daily;
@@ -199,7 +260,7 @@ function displayForecast(response) {
 
 function getForecast(coordinates) {
   let apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${coordinates.lat}&lon=${coordinates.lon}&appid=${apiKey}&units=metric`;
-  console.log(apiUrl);
+  // console.log(apiUrl);
 
   axios.get(apiUrl).then(displayForecast);
 }
