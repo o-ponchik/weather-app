@@ -19,11 +19,7 @@
   max-width: 700px;
   max-height: fit-content;
   /* width: 700px; */
-  background: linear-gradient(
-    44.8deg,
-    rgba(255, 136, 102, 0.67) -53.1%,
-    rgba(255, 221, 136, 0.28) 49%
-  );
+  background: linear-gradient(to top, #f3e7e9 0%, #e3eeff 99%, #e3eeff 100%);
 }
 
 /* Enter a city */

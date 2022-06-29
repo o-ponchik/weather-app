@@ -90,19 +90,6 @@ function showCurrentWeather(response) {
   );
 }
 
-// function dayOrNight(iconId) {
-//   let icon = "";
-//   if (iconId === `02d`) {
-//     icon = `https://bmcdn.nl/assets/weather-icons/v3.0/fill/svg/overcast-day.svg`;
-//   } else if (iconId === `02n`) {
-//     icon = `https://bmcdn.nl/assets/weather-icons/v3.0/fill/svg/extreme-night.svg`;
-//   } else if (iconId === `01n`) {
-//     icon = `https://bmcdn.nl/assets/weather-icons/v3.0/fill/svg/clear-night.svg`;
-//   } else {
-//     icon = `https://bmcdn.nl/assets/weather-icons/v3.0/fill/svg/clear-day.svg`;
-//   }
-// }
-
 // function to get API URL and data
 function getCurrentWeather(event) {
   event.preventDefault();
@@ -182,46 +169,44 @@ function displayWeatherData(
   weatherDescription.innerHTML = description;
 }
 
-//
+// Function for getting icon and implament it into project
 function getWeatherIconResource(resourceId, icon) {
   let weatherIconResource = "";
   if (resourceId >= 200 && resourceId <= 232) {
-    weatherIconResource = `https://bmcdn.nl/assets/weather-icons/v3.0/fill/svg/thunderstorms-extreme-rain.svg`;
+    weatherIconResource = `https://bmcdn.nl/assets/weather-icons/v3.0/line/svg/thunderstorms-extreme.svg`;
   } else if (
     resourceId >= 300 &&
     resourceId <= 321 &&
     resourceId >= 520 &&
     resourceId <= 521
   ) {
-    weatherIconResource = `https://bmcdn.nl/assets/weather-icons/v3.0/fill/svg/extreme-rain.svg`;
+    weatherIconResource = `https://bmcdn.nl/assets/weather-icons/v3.0/line/svg/extreme-rain.svg`;
   } else if (resourceId >= 500 && resourceId <= 504) {
     if (icon === `10d`) {
-      weatherIconResource = `https://bmcdn.nl/assets/weather-icons/v3.0/fill/svg/extreme-day-rain.svg`;
+      weatherIconResource = `https://bmcdn.nl/assets/weather-icons/v3.0/line/svg/extreme-day-rain.svg`;
     } else {
-      weatherIconResource = `https://bmcdn.nl/assets/weather-icons/v3.0/fill/svg/extreme-night-rain.svg`;
+      weatherIconResource = `https://bmcdn.nl/assets/weather-icons/v3.0/line/svg/extreme-night-rain.svg`;
     }
   } else if (resourceId === 511 && resourceId >= 600 && resourceId <= 622) {
-    weatherIconResource = `https://bmcdn.nl/assets/weather-icons/v3.0/fill/svg/extreme-sleet.svg`;
+    weatherIconResource = `https://bmcdn.nl/assets/weather-icons/v3.0/line/svg/extreme-snow.svg`;
   } else if (resourceId >= 701 && resourceId <= 781) {
-    weatherIconResource = `https://bmcdn.nl/assets/weather-icons/v3.0/fill/svg/extreme-fog.svg`;
+    weatherIconResource = `https://bmcdn.nl/assets/weather-icons/v3.0/line/svg/extreme-fog.svg`;
   } else if (resourceId === 800) {
     if (icon === `01d`) {
-      weatherIconResource = `https://bmcdn.nl/assets/weather-icons/v3.0/fill/svg/clear-day.svg`;
+      weatherIconResource = `https://bmcdn.nl/assets/weather-icons/v3.0/line/svg/clear-day.svg`;
     } else {
-      weatherIconResource = `https://bmcdn.nl/assets/weather-icons/v3.0/fill/svg/clear-night.svg`;
+      weatherIconResource = `https://bmcdn.nl/assets/weather-icons/v3.0/line/svg/clear-night.svg`;
     }
   } else if (resourceId === 801) {
     if (icon === `02d`) {
-      weatherIconResource = `https://bmcdn.nl/assets/weather-icons/v3.0/fill/svg/overcast-day.svg`;
+      weatherIconResource = `https://bmcdn.nl/assets/weather-icons/v3.0/line/svg/extreme-day.svg`;
     } else {
-      weatherIconResource = `https://bmcdn.nl/assets/weather-icons/v3.0/fill/svg/extreme-night.svg`;
+      weatherIconResource = `https://bmcdn.nl/assets/weather-icons/v3.0/line/svg/extreme-night.svg`;
     }
-  } else if (resourceId === 802) {
-    weatherIconResource = `https://bmcdn.nl/assets/weather-icons/v3.0/fill/svg/cloudy.svg`;
-  } else if (resourceId >= 803 && resourceId <= 804) {
-    weatherIconResource = `https://bmcdn.nl/assets/weather-icons/v3.0/fill/svg/overcast.svg`;
+  } else if (resourceId >= 802 && resourceId <= 804) {
+    weatherIconResource = `https://bmcdn.nl/assets/weather-icons/v3.0/line/svg/extreme.svg`;
   } else {
-    weatherIconResource = `https://bmcdn.nl/assets/weather-icons/v3.0/fill/svg/clear-day.svg`;
+    weatherIconResource = `https://bmcdn.nl/assets/weather-icons/v3.0/line/svg/clear-day.svg`;
   }
 
   return weatherIconResource;
@@ -231,19 +216,26 @@ function getWeatherIconResource(resourceId, icon) {
 function displayForecast(response) {
   let forecast = response.data.daily;
 
+  // let iconElement = document.querySelector(".icon-forecast");
+
+  console.log(response.data.daily);
+
   let forecastElement = document.querySelector("#weather-forecast");
 
   let forecastHTML = `<div class="row g-2 five-days-forecast">`;
 
   forecast.forEach(function (forecastDay, index) {
     if (index < 5) {
+      let resourceIconId = forecastDay.weather[0].id;
+      let iconResource = forecastDay.weather[0].icon;
       forecastHTML =
         forecastHTML +
         `<div class="col each-day shadow-sm p-3 mb-5 rounded">
       <h3 class="m-0">${formatForecastDay(forecastDay.dt)}</h3>
-      <img alt="" id="icon" src="http://openweathermap.org/img/wn/${
-        forecastDay.weather[0].icon
-      }@2x.png" width=50/>
+      <img alt="" class="icon-forecast" id="icon" src="${getWeatherIconResource(
+        resourceIconId,
+        iconResource
+      )}" width=50/>
       <p class="m-0">${Math.round(forecastDay.temp.max)}°C<span> ${Math.round(
           forecastDay.temp.min
         )}°C</span></p>
