@@ -277,6 +277,8 @@ document
   .querySelector(`#current-btn`)
   .addEventListener("click", onclickWeather);
 
+window.addEventListener("load", onclickWeather);
+
 // Convert celsius to Fahrenheit
 function changeToFahrenheit() {
   // remove the active class from #celsius

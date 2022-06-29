@@ -19,7 +19,11 @@
   max-width: 700px;
   max-height: fit-content;
   /* width: 700px; */
-  background: linear-gradient(to top, #f3e7e9 0%, #e3eeff 99%, #e3eeff 100%);
+  background: linear-gradient(
+    109.6deg,
+    rgb(223, 234, 247) 11.2%,
+    rgb(244, 248, 252) 91.1%
+  );
 }
 
 /* Enter a city */
@@ -67,17 +71,17 @@ time {
 }
 
 .temperature a {
-  font-weight: 100;
+  font-weight: 300;
   font-size: 25px;
   cursor: pointer;
-  color: #2a0163;
+  /* color: #2a0163; */
   text-decoration: none;
   cursor: pointer;
 }
 
-.temperature a:hover {
+/* .temperature a:hover {
   font-weight: 500;
-}
+} */
 
 .temperature .active {
   font-size: 30px;
