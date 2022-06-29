@@ -114,6 +114,8 @@ function displayWeatherForCurrentPosition(response) {
   let resourceId = response.data.list[2].weather[0].id;
   let icon = response.data.list[2].weather[0].icon;
 
+  console.log(response.data.list[2].weather[0].id);
+
   iconElement.src = getWeatherIconResource(resourceId, icon);
 
   iconElement.setAttribute(`alt`, response.data.list[2].weather[0].description);
@@ -175,10 +177,8 @@ function getWeatherIconResource(resourceId, icon) {
   if (resourceId >= 200 && resourceId <= 232) {
     weatherIconResource = `https://bmcdn.nl/assets/weather-icons/v3.0/line/svg/thunderstorms-extreme.svg`;
   } else if (
-    resourceId >= 300 &&
-    resourceId <= 321 &&
-    resourceId >= 520 &&
-    resourceId <= 521
+    (resourceId >= 300 && resourceId <= 321) ||
+    (resourceId >= 520 && resourceId <= 521)
   ) {
     weatherIconResource = `https://bmcdn.nl/assets/weather-icons/v3.0/line/svg/extreme-rain.svg`;
   } else if (resourceId >= 500 && resourceId <= 504) {
