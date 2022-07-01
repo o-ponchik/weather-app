@@ -101,24 +101,24 @@ function getCurrentWeather(event) {
 
 // Show weather for current location using API 📍
 function displayWeatherForCurrentPosition(response) {
-  let cityName = response.data.list[2].name;
-  temperatureCelsius = response.data.list[2].main.temp;
-  let humidity = response.data.list[2].main.humidity;
-  let windSpeed = response.data.list[2].wind.speed;
+  let cityName = response.data.list[0].name;
+  temperatureCelsius = response.data.list[0].main.temp;
+  let humidity = response.data.list[0].main.humidity;
+  let windSpeed = response.data.list[0].wind.speed;
   let weatherDescription =
-    response.data.list[2].weather[0].description.charAt(0).toUpperCase() +
-    response.data.list[2].weather[0].description.slice(1);
+    response.data.list[0].weather[0].description.charAt(0).toUpperCase() +
+    response.data.list[0].weather[0].description.slice(1);
 
   // icon
   let iconElement = document.querySelector("#icon");
-  let resourceId = response.data.list[2].weather[0].id;
-  let icon = response.data.list[2].weather[0].icon;
+  let resourceId = response.data.list[0].weather[0].id;
+  let icon = response.data.list[0].weather[0].icon;
 
-  console.log(response.data.list[2].weather[0].id);
+  console.log(response.data.list[0].weather[0].id);
 
   iconElement.src = getWeatherIconResource(resourceId, icon);
 
-  iconElement.setAttribute(`alt`, response.data.list[2].weather[0].description);
+  iconElement.setAttribute(`alt`, response.data.list[0].weather[0].description);
 
   displayWeatherData(
     cityName,
