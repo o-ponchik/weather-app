@@ -4,6 +4,7 @@ This is a weather forecasting app that provides you with the latest weather info
 ## Features
 - 5-day weather forecast for your current location or any location you search for
 - Display of current temperature, humidity, wind speed, and weather condition
+- Convertation of temperature from Celsius to Fahrenheit.
 - Clean and user-friendly interface with intuitive navigation
 
 ## Technology Stack
